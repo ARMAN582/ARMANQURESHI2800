@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arman Qureshi - Interactive Portfolio</title>
+<style>
+/* Reset & body */
+body, html {
+  margin:0; padding:0;
+  width:100%; height:100%;
+  overflow:hidden;
+  background:#0b0c1a;
+  font-family: Arial, sans-serif;
+  color:white;
+}
+
+/* Animated floating stars background */
+.star{
+  position:absolute;
+  background:white;
+  border-radius:50%;
+  animation:fall linear infinite;
+  opacity:0.8;
+}
+
+@keyframes fall{
+  0%{transform:translateY(-10px) rotate(0deg);}
+  100%{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* Header text */
+header{
+  position:absolute;
+  top:30px;
+  width:100%;
+  text-align:center;
+  z-index:10;
+}
+header h1{
+  font-size:50px;
+  color:#60a5fa;
+  text-shadow:0 0 10px #60a5fa,0 0 20px #2563eb;
+  animation:floatText 3s ease-in-out infinite alternate;
+}
+@keyframes floatText{
+  from{transform:translateY(0);}
+  to{transform:translateY(-15px);}
+}
+
+/* Buttons */
+.buttons{
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+  z-index:10;
+}
+
+.buttons a{
+  padding:16px 35px;
+  text-decoration:none;
+  font-weight:bold;
+  border-radius:14px;
+  text-align:center;
+  color:white;
+  transition:0.4s;
+  font-size:20px;
+  transform-origin:center;
+}
+
+/* Unique colors */
+.buttons a.whatsapp{background:#25D366;}
+.buttons a.instagram{background:#C13584;}
+.buttons a.facebook{background:#3b5998;}
+.buttons a.snapchat{background:#FFFC00; color:black;}
+.buttons a.gmail{background:#D44638;}
+
+/* Hover animation: tilt + rotate + glow */
+.buttons a:hover{
+  transform:scale(1.2) rotateZ(10deg) rotateX(5deg) rotateY(5deg);
+  box-shadow:0 0 25px rgba(255,255,255,0.7);
+}
+
+/* Optional subtle rotation animation for all buttons */
+@keyframes buttonFloat{
+  0%{transform:translate(-50%,-50%) rotate(0deg);}
+  50%{transform:translate(-50%,-52%) rotate(2deg);}
+  100%{transform:translate(-50%,-50%) rotate(0deg);}
+}
+.buttons{
+  animation:buttonFloat 5s ease-in-out infinite alternate;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Arman Qureshi</h1>
+</header>
+
+<div class="buttons">
+  <a class="whatsapp" href="https://wa.me/919026550240">WhatsApp</a>
+  <a class="instagram" href="https://www.instagram.com/armanqureshi2800">Instagram</a>
+  <a class="facebook" href="https://www.facebook.com/share/19pPMX9SMV/">Facebook</a>
+  <a class="snapchat" href="https://www.snapchat.com/add/armanqureshi_28">Snapchat</a>
+  <a class="gmail" href="mailto:k4046280@gmail.com">Gmail</a>
+</div>
+
+<script>
+// Create heavy animated stars
+const starCount = 150;
+for(let i=0;i<starCount;i++){
+  const star = document.createElement('div');
+  star.classList.add('star');
+  star.style.left = Math.random()*100+'vw';
+  star.style.top = Math.random()*100+'vh';
+  const size = Math.random()*3 + 1;
+  star.style.width = size+'px';
+  star.style.height = size+'px';
+  star.style.animationDuration = (5 + Math.random()*5) + 's';
+  star.style.opacity = Math.random()*0.8 + 0.2;
+  document.body.appendChild(star);
+}
+</script>
+
+</body>
+    </html>
