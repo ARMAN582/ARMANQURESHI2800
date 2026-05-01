@@ -1,130 +1,291 @@
+```html id="full_upi_dashboard_final"
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arman Qureshi - Interactive Portfolio</title>
+<title>Arman Fintech Dashboard</title>
+
 <style>
-/* Reset & body */
-body, html {
-  margin:0; padding:0;
-  width:100%; height:100%;
-  overflow:hidden;
-  background:#0b0c1a;
-  font-family: Arial, sans-serif;
-  color:white;
+body{
+margin:0;
+font-family:Segoe UI;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+color:white;
+display:flex;
 }
 
-/* Animated floating stars background */
-.star{
-  position:absolute;
-  background:white;
-  border-radius:50%;
-  animation:fall linear infinite;
-  opacity:0.8;
+/* ================= LOGIN ================= */
+#login{
+position:fixed;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+z-index:9999;
 }
 
-@keyframes fall{
-  0%{transform:translateY(-10px) rotate(0deg);}
-  100%{transform:translateY(110vh) rotate(360deg);}
+.box{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+padding:30px;
+border-radius:16px;
+width:280px;
+text-align:center;
 }
 
-/* Header text */
-header{
-  position:absolute;
-  top:30px;
-  width:100%;
-  text-align:center;
-  z-index:10;
-}
-header h1{
-  font-size:50px;
-  color:#60a5fa;
-  text-shadow:0 0 10px #60a5fa,0 0 20px #2563eb;
-  animation:floatText 3s ease-in-out infinite alternate;
-}
-@keyframes floatText{
-  from{transform:translateY(0);}
-  to{transform:translateY(-15px);}
+.box input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:8px;
+border:none;
 }
 
-/* Buttons */
-.buttons{
-  position:absolute;
-  top:50%; left:50%;
-  transform:translate(-50%,-50%);
-  display:flex;
-  flex-direction:column;
-  gap:25px;
-  z-index:10;
+.box button{
+width:100%;
+padding:10px;
+background:#00ffcc;
+border:none;
+border-radius:8px;
+cursor:pointer;
 }
 
-.buttons a{
-  padding:16px 35px;
-  text-decoration:none;
-  font-weight:bold;
-  border-radius:14px;
-  text-align:center;
-  color:white;
-  transition:0.4s;
-  font-size:20px;
-  transform-origin:center;
+/* ================= SIDEBAR ================= */
+.sidebar{
+width:220px;
+height:100vh;
+position:fixed;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(12px);
+padding:20px;
 }
 
-/* Unique colors */
-.buttons a.whatsapp{background:#25D366;}
-.buttons a.instagram{background:#C13584;}
-.buttons a.facebook{background:#3b5998;}
-.buttons a.snapchat{background:#FFFC00; color:black;}
-.buttons a.gmail{background:#D44638;}
-
-/* Hover animation: tilt + rotate + glow */
-.buttons a:hover{
-  transform:scale(1.2) rotateZ(10deg) rotateX(5deg) rotateY(5deg);
-  box-shadow:0 0 25px rgba(255,255,255,0.7);
+.sidebar button{
+width:100%;
+padding:10px;
+margin:6px 0;
+background:transparent;
+border:1px solid rgba(255,255,255,0.2);
+color:white;
+border-radius:10px;
+cursor:pointer;
 }
 
-/* Optional subtle rotation animation for all buttons */
-@keyframes buttonFloat{
-  0%{transform:translate(-50%,-50%) rotate(0deg);}
-  50%{transform:translate(-50%,-52%) rotate(2deg);}
-  100%{transform:translate(-50%,-50%) rotate(0deg);}
+.sidebar button:hover{
+background:#00ffcc;
+color:black;
 }
-.buttons{
-  animation:buttonFloat 5s ease-in-out infinite alternate;
+
+/* ================= MAIN ================= */
+.main{
+margin-left:240px;
+padding:20px;
+width:100%;
 }
+
+/* ================= CARD ================= */
+.card{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+padding:18px;
+border-radius:16px;
+margin-bottom:15px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+/* SECTIONS */
+.section{display:none;}
+.active{display:block;}
+
+a{color:#3b82f6;text-decoration:none;}
 </style>
 </head>
+
 <body>
 
-<header>
-  <h1>Arman Qureshi</h1>
-</header>
+<!-- ================= LOGIN ================= -->
+<div id="login">
+<div class="box">
+<h2>🔐 Login</h2>
+<input id="pass" placeholder="Enter PIN">
+<button onclick="login()">Enter</button>
+</div>
+</div>
 
-<div class="buttons">
-  <a class="whatsapp" href="https://wa.me/919026550240">WhatsApp</a>
-  <a class="instagram" href="https://www.instagram.com/armanqureshi2800">Instagram</a>
-  <a class="facebook" href="https://www.facebook.com/share/19pPMX9SMV/">Facebook</a>
-  <a class="snapchat" href="https://www.snapchat.com/add/armanqureshi_28">Snapchat</a>
-  <a class="gmail" href="mailto:k4046280@gmail.com">Gmail</a>
+<!-- ================= SIDEBAR ================= -->
+<div class="sidebar">
+<h3>FINTECH PANEL</h3>
+<button onclick="show('home')">🏠 Home</button>
+<button onclick="show('social')">📱 Social</button>
+<button onclick="show('finance')">📊 Finance</button>
+<button onclick="show('apps')">☁️ Apps</button>
+<button onclick="show('upi')">💳 UPI Analytics</button>
+</div>
+
+<!-- ================= MAIN ================= -->
+<div class="main">
+
+<!-- HOME -->
+<div id="home" class="section active">
+<div class="card">
+<h1>Arman Qureshi</h1>
+<p>Trader • Creator • Dreamer 🔥</p>
+<p>📍 Mumbai</p>
+</div>
+</div>
+
+<!-- SOCIAL -->
+<div id="social" class="section">
+<div class="card">
+<h2>📱 Social Media</h2>
+<p>Instagram → <a href="https://instagram.com/armanqureshi2800">Open</a></p>
+<p>WhatsApp → <a href="https://wa.me/9026550240">Open</a></p>
+<p>Facebook → <a href="https://facebook.com">Open</a></p>
+<p>YouTube → <a href="https://youtube.com">Open</a></p>
+</div>
+</div>
+
+<!-- FINANCE -->
+<div id="finance" class="section">
+<div class="card">
+<h2>📊 Finance</h2>
+<p>Client ID: 902655</p>
+<p>Monthly: ₹18,000</p>
+<p>Side: ₹5,000</p>
+<p>Trading: ₹20,000</p>
+<p>Annual: ₹3,96,000</p>
+</div>
+</div>
+
+<!-- APPS -->
+<div id="apps" class="section">
+<div class="card">
+<h2>☁️ Apps</h2>
+
+<div class="grid">
+
+<div class="card">📧 Gmail<br><a href="https://mail.google.com">Open</a></div>
+<div class="card">🗂️ Drive<br><a href="https://drive.google.com">Open</a></div>
+<div class="card">📍 Maps<br><a href="https://maps.google.com">Open</a></div>
+<div class="card">📦 Amazon<br><a href="https://amazon.in">Open</a></div>
+<div class="card">🎵 Spotify<br><a href="https://spotify.com">Open</a></div>
+
+<div class="card">💳 GPay Scanner<br><button onclick="alert('Scanner UI Mode')">Open</button></div>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= UPI ANALYTICS ================= -->
+<div id="upi" class="section">
+
+<div class="card">
+<h2>💳 UPI Analytics Dashboard</h2>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h3>📥 Incoming</h3>
+<h2 id="in">₹0</h2>
+</div>
+
+<div class="card">
+<h3>📤 Outgoing</h3>
+<h2 id="out">₹0</h2>
+</div>
+
+<div class="card">
+<h3>💰 Net Flow</h3>
+<h2 id="net">₹0</h2>
+</div>
+
+<div class="card">
+<h3>📊 Transactions</h3>
+<h2 id="tx">0</h2>
+</div>
+
+</div>
+
+<div class="card">
+<h3>📈 Live Chart</h3>
+<canvas id="chart" width="300" height="120" style="width:100%;background:rgba(255,255,255,0.05);border-radius:12px;"></canvas>
+</div>
+
+</div>
+
 </div>
 
 <script>
-// Create heavy animated stars
-const starCount = 150;
-for(let i=0;i<starCount;i++){
-  const star = document.createElement('div');
-  star.classList.add('star');
-  star.style.left = Math.random()*100+'vw';
-  star.style.top = Math.random()*100+'vh';
-  const size = Math.random()*3 + 1;
-  star.style.width = size+'px';
-  star.style.height = size+'px';
-  star.style.animationDuration = (5 + Math.random()*5) + 's';
-  star.style.opacity = Math.random()*0.8 + 0.2;
-  document.body.appendChild(star);
+
+const PIN="902655";
+
+/* LOGIN */
+function login(){
+let p=document.getElementById("pass").value;
+if(p===PIN){
+document.getElementById("login").style.display="none";
+}else{
+alert("Wrong PIN");
 }
+}
+
+/* NAV */
+function show(id){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+/* UPI DATA */
+let inVal=12000;
+let outVal=7000;
+let tx=20;
+
+function update(){
+inVal+=Math.random()*500;
+outVal+=Math.random()*300;
+tx+=Math.floor(Math.random()*2);
+
+document.getElementById("in").innerText="₹"+Math.floor(inVal);
+document.getElementById("out").innerText="₹"+Math.floor(outVal);
+document.getElementById("net").innerText="₹"+Math.floor(inVal-outVal);
+document.getElementById("tx").innerText=tx;
+
+draw();
+}
+
+function draw(){
+let c=document.getElementById("chart");
+let ctx=c.getContext("2d");
+
+ctx.clearRect(0,0,300,120);
+
+ctx.fillStyle="#00ffcc";
+ctx.fillRect(50,100,-(inVal/200),-50);
+
+ctx.fillStyle="#ff4d4d";
+ctx.fillRect(150,100,-(outVal/200),-50);
+}
+
+setInterval(update,2000);
+update();
+
 </script>
 
 </body>
-    </html>
+</html>
+```
